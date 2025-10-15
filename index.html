@@ -1229,5 +1229,57 @@
 
         createFloatingElements();
     </script>
+    <!-- Inspect Blocked Modal -->
+<div id="inspectBlockedModal" class="modal-overlay">
+  <div class="modal" style="text-align:center;">
+    <div class="modal-header">
+      <h3><i class="fa-solid fa-shield-halved" style="color:#db1d58;margin-right:10px;"></i> Action Blocked</h3>
+      <button class="close-modal" id="closeInspectBlocked">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:1.1rem;color:#db1d58;margin-bottom:10px;">
+        Inspecting or viewing source is disabled on this demo site.
+      </p>
+      <p style="color:#434548;">For real services, visit <a href="https://www.nivratech.online" target="_blank" style="color:#21939d;text-decoration:underline;">www.nivratech.online</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  function showInspectBlockedModal() {
+    document.getElementById('inspectBlockedModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hideInspectBlockedModal() {
+    document.getElementById('inspectBlockedModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('closeInspectBlocked').addEventListener('click', hideInspectBlockedModal);
+  document.getElementById('inspectBlockedModal').addEventListener('click', function(e) {
+    if (e.target === this) hideInspectBlockedModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (
+      e.keyCode === 123 || // F12
+      (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || // Ctrl+Shift+I/J
+      (e.ctrlKey && e.keyCode === 85) // Ctrl+U
+    ) {
+      e.preventDefault();
+      showInspectBlockedModal();
+      return false;
+    }
+  });
+
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    showInspectBlockedModal();
+  });
+});
+</script>
 </body>
+
 </html>
